@@ -1,0 +1,16 @@
+package ru.ferin.consolerpg.command;
+
+import ru.ferin.consolerpg.core.ConsoleRPG;
+
+public class CommandExit extends CommandBase{
+    @Override
+    public void execute(ConsoleRPG consoleRPG) {
+        System.out.println("Thanks for playing!");
+        consoleRPG.isRunning = false;
+    }
+
+    @Override
+    public String getName() {
+        return "exit";
+    }
+}
