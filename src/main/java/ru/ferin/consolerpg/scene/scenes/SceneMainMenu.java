@@ -1,12 +1,13 @@
-package ru.ferin.consolerpg.scene;
+package ru.ferin.consolerpg.scene.scenes;
 
+import ru.ferin.consolerpg.core.ConsoleRPG;
+import ru.ferin.consolerpg.entity.EntityPlayer;
 import ru.ferin.consolerpg.handler.SaveHandler;
+import ru.ferin.consolerpg.scene.Action;
+import ru.ferin.consolerpg.scene.Scene;
 
 public class SceneMainMenu extends Scene {
-    @Override
-    public String getDescription() {
-        return "Main menu\n" + super.getDescription();
-    }
+
 
     @Override
     public void initActions() {
@@ -32,8 +33,15 @@ public class SceneMainMenu extends Scene {
 
             @Override
             public Result execute() {
-                return new Result("AHALAI MAHALAI", true);
+                ConsoleRPG.getInstance().setPlayer(new EntityPlayer(100, 1));
+                ConsoleRPG.getInstance().setCurrentScene(new SceneEnterIntoDungeon());
+                return new Result("Created new game", true);
             }
         });
+    }
+
+    @Override
+    public String getDescription() {
+        return "Main menu"+getActionsListAsString();
     }
 }

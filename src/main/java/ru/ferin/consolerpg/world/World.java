@@ -1,6 +1,7 @@
 package ru.ferin.consolerpg.world;
 
-import ru.ferin.consolerpg.entity.Entity;
+import ru.ferin.consolerpg.entity.EntityBase;
+import ru.ferin.consolerpg.entity.EntityEnemy;
 import ru.ferin.consolerpg.world.locations.LocationBase;
 
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ import java.util.List;
 //Благо я забил на эту идею
 public class World {
     LocationBase currentLocation;
-    List<Entity> entities = new ArrayList<>();
+    List<EntityBase> entities = new ArrayList<>();
     public World(int level) {
 
     }
-    public void createEntityInWorld(Entity entity) {
+    public void createуEnemyWorld(EntityEnemy entity) {
 
     }
 }

@@ -1,14 +1,13 @@
 package ru.ferin.consolerpg.core;
 
-import ru.ferin.consolerpg.entity.Entity;
 import ru.ferin.consolerpg.entity.EntityPlayer;
 import ru.ferin.consolerpg.handler.ConsoleInputHandler;
 import ru.ferin.consolerpg.handler.SaveHandler;
+import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
-import ru.ferin.consolerpg.scene.SceneMainMenu;
+import ru.ferin.consolerpg.scene.scenes.SceneMainMenu;
 import ru.ferin.consolerpg.world.World;
 
-import java.beans.Transient;
 import java.util.Scanner;
 
 import static ru.ferin.consolerpg.command.CommandBase.registerCommands;
@@ -50,13 +49,21 @@ public class ConsoleRPG {
         Но поскольку это текстовая игра, и у неё не может быть понятия "асинхронно работающий сервер" (т.к. любое событие происходит только после ввода команды/ключевой фразы),
         я отказался от этой идеи.
         */
+        /*
+        А еще я хрен знает, зачем я создал экземпляр Thread вообще.
+        По крайней мере я уже не помню.
+         */
         Thread mainThread = new Thread(() -> {
             while (isRunning) {
                 if (currentScene == null) currentScene = new SceneMainMenu();
-                println("============================\n"+currentScene.getDescription());
+                print("============================\n");
+                print(currentScene.getDescription());
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
+                print("============================\n");
+                print("----------------------------\n");
                 consoleInputHandler.handleInput(input);
+                print("----------------------------\n");
             }
         });
         mainThread.setName("Main Thread");
@@ -71,22 +78,36 @@ public class ConsoleRPG {
         Main.EXECUTOR.execute(this::save);
         isRunning = false;
     }
+
+    /**
+     * Делаем вид, что разбираемся в ООП
+     * @return экземпляр игры
+     */
     public static ConsoleRPG getInstance()
     {
         if (consoleRPG == null) throw new IllegalStateException("ConsoleRPG is not initialized");
         return consoleRPG;
     }
 
+    /**
+     * СОХРАНИСЬ, ИБО ГРЯНЕТ СВЕТ ГОСПОДЕНЬ!
+     */
     private void save() {
         SaveHandler.saveWorld(world);
     }
-    public void excuteAction(int id) {
+    public void excuteAction(int number) {
 
-        Scene.Action.Result result = currentScene.executeAction(id);
+        Action.Result result = currentScene.executeAction(number);
         println(result.message);
+    }
+    public void setCurrentScene(Scene scene) {
+        this.currentScene = scene;
     }
     public EntityPlayer getPlayer() {
         return player;
+    }
+    public void setPlayer(EntityPlayer player) {
+        this.player = player;
     }
     public void setNewWorld(World world) {
         this.world = world;

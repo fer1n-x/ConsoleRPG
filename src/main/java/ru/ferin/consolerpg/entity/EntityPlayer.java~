@@ -27,11 +27,6 @@ public class EntityPlayer extends EntityBase {
     }
 
     @Override
-    public int getLvl() {
-        return lvl;
-    }
-
-    @Override
     public void attack(double strength) {
     }
 
