@@ -89,9 +89,6 @@ public class ConsoleRPG {
         return consoleRPG;
     }
 
-    /**
-     * СОХРАНИСЬ, ИБО ГРЯНЕТ СВЕТ ГОСПОДЕНЬ!
-     */
     private void save() {
         SaveHandler.saveWorld(world);
     }
