@@ -29,6 +29,6 @@ public abstract class LocationBase {
         currentEnemy.attack(strength);
     }
     public boolean isEnemiesLeft() {
-        return enemies.isEmpty();
+        return !enemies.isEmpty();
     }
 }

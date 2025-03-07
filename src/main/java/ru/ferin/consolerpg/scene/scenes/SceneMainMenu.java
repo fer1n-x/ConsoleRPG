@@ -42,6 +42,6 @@ public class SceneMainMenu extends Scene {
 
     @Override
     public String getDescription() {
-        return "Main menu"+getActionsListAsString();
+        return "Main menu";
     }
 }

@@ -3,11 +3,13 @@ package ru.ferin.consolerpg.scene.scenes;
 import ru.ferin.consolerpg.core.ConsoleRPG;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
+import ru.ferin.consolerpg.world.locations.LocationDungeon;
 
 public class SceneEnterIntoDungeon extends Scene {
     boolean triedToDisagree = false;
     @Override
     public void initActions() {
+        actions.clear();
         if (triedToDisagree) {
             actions.add(new Action() {
 
@@ -18,7 +20,7 @@ public class SceneEnterIntoDungeon extends Scene {
 
                 @Override
                 public Result execute() {
-                    ConsoleRPG.getInstance().setCurrentScene(new SceneIntoDungeon());
+                    ConsoleRPG.getInstance().setCurrentScene(new SceneIntoDungeon(new LocationDungeon("Dungeon", 10, ConsoleRPG.getInstance().getPlayer().getLvl())));
                     return new Result("Good luck.", true);
                 }
             });
@@ -32,7 +34,7 @@ public class SceneEnterIntoDungeon extends Scene {
 
                 @Override
                 public Result execute() {
-                    ConsoleRPG.getInstance().setCurrentScene(new SceneIntoDungeon());
+                    ConsoleRPG.getInstance().setCurrentScene(new SceneIntoDungeon(new LocationDungeon("Dungeon", 10, ConsoleRPG.getInstance().getPlayer().getLvl())));
                     return new Result("Good luck", true);
                 }
             });
@@ -56,9 +58,9 @@ public class SceneEnterIntoDungeon extends Scene {
     @Override
     public String getDescription() {
         if (triedToDisagree) {
-            return "Cmon, you have no choice. Do you want to enter the dungeon?"+getActionsListAsString();
+            return "Cmon, you have no choice. Do you want to enter the dungeon?";
         } else {
-            return "Your level is "+ ConsoleRPG.getInstance().getPlayer().getLvl()+". Do you want to enter the dungeon?"+getActionsListAsString();
+            return "Your level is "+ ConsoleRPG.getInstance().getPlayer().getLvl()+". Do you want to enter the dungeon?";
         }
     }
 }

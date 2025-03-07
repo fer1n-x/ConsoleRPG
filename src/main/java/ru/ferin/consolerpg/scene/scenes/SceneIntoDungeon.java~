@@ -1,6 +1,5 @@
 package ru.ferin.consolerpg.scene.scenes;
 
-import ru.ferin.consolerpg.core.ConsoleRPG;
 import ru.ferin.consolerpg.entity.EntityEnemy;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
@@ -17,7 +16,7 @@ public class SceneIntoDungeon extends Scene {
 
             @Override
             public String getDescription() {
-                return "Attack it with " + ConsoleRPG.getInstance().getPlayer().getAttackStrength();
+                return null;
             }
 
             @Override

@@ -1,8 +1,5 @@
 package ru.ferin.consolerpg.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 public class EntityPlayer extends EntityBase {
 
@@ -23,11 +20,22 @@ public class EntityPlayer extends EntityBase {
 
     @Override
     public double getAttackStrength() {
-        return 0;
+        return attackStrength*lvl;
+    }
+
+    @Override
+    public int getLvl() {
+        return lvl;
     }
 
     @Override
     public void attack(double strength) {
+    }
+    public void setHealth(double health) {
+        this.health = health;
+    }
+    public void addHealth(double health) {
+        this.health += health;
     }
 
 }

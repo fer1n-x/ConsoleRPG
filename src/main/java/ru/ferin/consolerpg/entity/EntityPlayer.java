@@ -1,8 +1,7 @@
 package ru.ferin.consolerpg.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+
+import ru.ferin.consolerpg.util.SOut;
 
 public class EntityPlayer extends EntityBase {
 
@@ -23,7 +22,7 @@ public class EntityPlayer extends EntityBase {
 
     @Override
     public double getAttackStrength() {
-        return 0;
+        return attackStrength*lvl;
     }
 
     @Override
@@ -33,6 +32,11 @@ public class EntityPlayer extends EntityBase {
 
     @Override
     public void attack(double strength) {
+    }
+
+    @Override
+    public void death() {
+        //no-op
     }
 
 }

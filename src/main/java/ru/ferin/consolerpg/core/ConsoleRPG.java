@@ -57,7 +57,7 @@ public class ConsoleRPG {
             while (isRunning) {
                 if (currentScene == null) currentScene = new SceneMainMenu();
                 print("============================\n");
-                print(currentScene.getDescription());
+                print(currentScene.getContent());
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
                 print("============================\n");

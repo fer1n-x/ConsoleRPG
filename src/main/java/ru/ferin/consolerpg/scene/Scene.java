@@ -31,6 +31,9 @@ public abstract class Scene {
 
     public abstract void initActions();
     public abstract String getDescription();
+    public String getContent() {
+        return getDescription() + getActionsListAsString();
+    }
 
 
 }
