@@ -4,10 +4,13 @@ public abstract class EntityBase {
     protected double health;
     protected int lvl;
     protected double attackStrength;
-    public EntityBase(double health, int lvl) {
+    protected double defense;
+    public EntityBase(double health, int lvl, double attackStrength, double defense) {
+        health *= (Math.max(0, lvl*0.1));
         this.health = health;
         this.lvl = lvl;
-        this.attackStrength = 2;
+        this.attackStrength = attackStrength;
+        this.defense = defense;
     }
     public abstract String getName();
     public abstract double getHealth();

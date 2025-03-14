@@ -5,6 +5,7 @@ import ru.ferin.consolerpg.core.ConsoleRPG;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO 14.03.2025 Я УЖЕ ЗАБЫЛ ЗАЧЕМ ЗАВЕЗ СЮДА КОМАНДЫ, ААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
 public abstract class CommandBase {
     public static List<CommandBase> commandList = new ArrayList<>();
     public abstract void execute(ConsoleRPG consoleRPG);

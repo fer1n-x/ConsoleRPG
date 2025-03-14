@@ -13,7 +13,7 @@ public abstract class LocationBase {
     public LocationBase(String name, int enemyCount, int lvl) {
         this.name = name;
         for (int i = 0; i < enemyCount; i++) {
-            createEnemy(new EntityEnemy(100, lvl));
+            createEnemy(new EntityEnemy(100, lvl, 2, 0));
         }
     }
     public void createEnemy(EntityEnemy entity) {
@@ -23,12 +23,17 @@ public abstract class LocationBase {
         return currentEnemy;
     }
     public void switchEnemy() {
-        currentEnemy = enemies.pop();
+        if (enemies.isEmpty()) currentEnemy = null;
+        else currentEnemy = enemies.pop();
     }
     public void attackCurrentEnemy(double strength) {
         currentEnemy.attack(strength);
     }
+    public boolean isCurrentEnemyDead() {
+        return currentEnemy.getHealth() <= 0;
+    }
     public boolean isEnemiesLeft() {
         return enemies.isEmpty();
     }
+
 }

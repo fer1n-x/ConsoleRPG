@@ -33,7 +33,7 @@ public class SceneMainMenu extends Scene {
 
             @Override
             public Result execute() {
-                ConsoleRPG.getInstance().setPlayer(new EntityPlayer(100, 1));
+                ConsoleRPG.getInstance().setPlayer(new EntityPlayer(100, 1, 2, 0));
                 ConsoleRPG.getInstance().setCurrentScene(new SceneEnterIntoDungeon());
                 return new Result("Created new game", true);
             }

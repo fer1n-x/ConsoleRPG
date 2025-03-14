@@ -106,6 +106,15 @@ public class ConsoleRPG {
     public void setPlayer(EntityPlayer player) {
         this.player = player;
     }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
     public void setNewWorld(World world) {
         this.world = world;
     }

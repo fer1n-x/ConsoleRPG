@@ -4,8 +4,10 @@ import ru.ferin.consolerpg.core.ConsoleRPG;
 
 public class EntityEnemy extends EntityBase {
 
-    public EntityEnemy(int health, int lvl) {
-        super(health, lvl);
+
+    public EntityEnemy(double health, int lvl, double attackStrength, double defense) {
+
+        super(health, lvl, attackStrength, defense);
     }
 
     @Override
@@ -15,7 +17,7 @@ public class EntityEnemy extends EntityBase {
 
     @Override
     public double getHealth() {
-        return health*(Math.max(0, lvl*0.1));
+        return health;
     }
 
     @Override
@@ -25,7 +27,8 @@ public class EntityEnemy extends EntityBase {
 
     @Override
     public void attack(double strength) {
-        this.health -= strength;
+        this.health = Math.max(0, this.health - strength);
+        if (this.health == 0) death();
     }
 
     @Override

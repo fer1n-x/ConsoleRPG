@@ -10,7 +10,6 @@ public abstract class Scene {
     public List<Action> actions = new ArrayList<>();
 
     public String getActionsListAsString() {
-        if (!actions.isEmpty()) actions.clear();
         initActions();
         int id = 1;
         ListBuilder listBuilder = new ListBuilder();
