@@ -1,13 +1,15 @@
 package ru.ferin.consolerpg.scene;
 
 import ru.ferin.consolerpg.core.ConsoleRPG;
+import ru.ferin.consolerpg.world.locations.LocationBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Scene {
-    private static final ConsoleRPG consoleRPG = ConsoleRPG.getInstance();
-    public List<Action> actions = new ArrayList<>();
+    protected static final ConsoleRPG consoleRPG = ConsoleRPG.getInstance();
+    protected LocationBase location = consoleRPG.getWorld() == null ? null : consoleRPG.getWorld().getCurrentLocation();
+    protected List<Action> actions = new ArrayList<>();
 
     public String getActionsListAsString() {
         if (!actions.isEmpty()) actions.clear();
@@ -28,6 +30,9 @@ public abstract class Scene {
         return action.execute();
     }
 
+    public void preInit() {
+        //noop
+    }
     public abstract void initActions();
     public abstract String getDescription();
     public String getContent() {

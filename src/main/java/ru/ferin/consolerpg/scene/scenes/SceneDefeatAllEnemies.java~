@@ -16,19 +16,19 @@ public class SceneDefeatAllEnemies extends Scene {
 
             @Override
             public String getDescription() {
-                return "Ok";
+                return "Yes";
             }
 
             @Override
             public Result execute() {
                 consoleRPG.setCurrentScene(new SceneEnterIntoDungeon());
-                return new Action.Result("Moving you to next scene", true);
+                return new Action.Result("Good luck", true);
             }
         });
     }
 
     @Override
     public String getDescription() {
-        return "You defeated all enemies.";
+        return "You defeated all enemies. Move to the next level ("+ ConsoleRPG.getInstance().getPlayer().getLvl()+1+")?";
     }
 }

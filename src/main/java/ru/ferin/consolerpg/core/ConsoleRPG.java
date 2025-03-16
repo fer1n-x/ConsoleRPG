@@ -57,6 +57,7 @@ public class ConsoleRPG {
             while (isRunning) {
                 if (currentScene == null) currentScene = new SceneMainMenu();
                 print("============================\n");
+                currentScene.preInit();
                 print(currentScene.getContent());
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
@@ -112,10 +113,6 @@ public class ConsoleRPG {
     }
 
     public void setWorld(World world) {
-        this.world = world;
-    }
-
-    public void setNewWorld(World world) {
         this.world = world;
     }
 }

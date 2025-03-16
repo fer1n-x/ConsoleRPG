@@ -1,10 +1,9 @@
 package ru.ferin.consolerpg.scene.scenes;
 
-import ru.ferin.consolerpg.core.ConsoleRPG;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
 
-public class SceneDefeatAllEnemies extends Scene {
+public class SceneDefeatEnemy extends Scene {
     @Override
     public void preInit() {
 
@@ -16,19 +15,20 @@ public class SceneDefeatAllEnemies extends Scene {
 
             @Override
             public String getDescription() {
-                return "Ok";
+                return "Switch to the next enemy";
             }
 
             @Override
             public Result execute() {
-                consoleRPG.setCurrentScene(new SceneEnterIntoDungeon());
-                return new Action.Result("Moving you to next scene", true);
+                location.nextEnemy();
+                consoleRPG.setCurrentScene(new SceneIntoDungeon());
+                return new Result("Switched to the next enemy", true);
             }
         });
     }
 
     @Override
     public String getDescription() {
-        return "You defeated all enemies.";
+        return "You defeated the enemy. Remain " + location.getEnemiesCount() + " enemies.";
     }
 }

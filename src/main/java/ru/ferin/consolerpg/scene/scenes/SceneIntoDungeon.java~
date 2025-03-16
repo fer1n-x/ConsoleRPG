@@ -5,8 +5,16 @@ import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
 import ru.ferin.consolerpg.world.locations.LocationBase;
 
+import java.util.EmptyStackException;
+
 public class SceneIntoDungeon extends Scene {
-    LocationBase location = ConsoleRPG.getInstance().getWorld().getCurrentLocation();
+
+    @Override
+    public void preInit() {
+        if (location.isCurrentEnemyDead() && location.isEnemiesLeft()) consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
+        else if (location.isCurrentEnemyDead() && !location.isEnemiesLeft()) consoleRPG.setCurrentScene(new SceneDefeatEnemy());
+    }
+
     @Override
     public void initActions() {
         if (!location.isEnemiesLeft()) {
@@ -21,21 +29,10 @@ public class SceneIntoDungeon extends Scene {
                     @Override
                     public Result execute() {
                         location.attackCurrentEnemy(ConsoleRPG.getInstance().getPlayer().getAttackStrength());
+                        if (location.isCurrentEnemyDead()) {
+                            return new Result("Enemy died.", true);
+                        }
                         return new Result("Enemy attacked. He has " + location.getCurrentEnemy().getHealth() + " hp", true);
-                    }
-                });
-            } else {
-                actions.add(new Action() {
-
-                    @Override
-                    public String getDescription() {
-                        return "Switch to the next enemy";
-                    }
-
-                    @Override
-                    public Result execute() {
-                        location.switchEnemy();
-                        return new Result("Switched to the next enemy", true);
                     }
                 });
             }
@@ -46,6 +43,16 @@ public class SceneIntoDungeon extends Scene {
 
     @Override
     public String getDescription() {
+        try {
+            if (location.getCurrentEnemy() == null) location.nextEnemy();
+        } catch (EmptyStackException e) {
+            ConsoleRPG.getInstance().setCurrentScene(new SceneDefeatAllEnemies());
+            return "";
+        }
+        if (!location.isEnemiesLeft() && location.isCurrentEnemyDead()) {
+            consoleRPG.setCurrentScene(new SceneDefeatEnemy());
+            return "";
+        }
         return "You see a monster with " + location.getCurrentEnemy().getHealth() + " hp";
     }
 }

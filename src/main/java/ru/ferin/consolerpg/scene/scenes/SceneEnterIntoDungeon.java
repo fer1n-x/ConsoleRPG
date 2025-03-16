@@ -9,6 +9,12 @@ import ru.ferin.consolerpg.world.locations.LocationDungeon;
 
 public class SceneEnterIntoDungeon extends Scene {
     boolean triedToDisagree = false;
+
+    @Override
+    public void preInit() {
+
+    }
+
     @Override
     public void initActions() {
         actions.clear();
@@ -21,8 +27,8 @@ public class SceneEnterIntoDungeon extends Scene {
 
             @Override
             public Result execute() {
-                ConsoleRPG.getInstance().setWorld(new World(new LocationDungeon("Dungeon", 10, ConsoleRPG.getInstance().getPlayer().getLvl())));
-                ConsoleRPG.getInstance().setCurrentScene(new SceneIntoDungeon());
+                consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", 10, ConsoleRPG.getInstance().getPlayer().getLvl())));
+                consoleRPG.setCurrentScene(new SceneIntoDungeon());
                 return new Result("Good luck", true);
             }
         });
