@@ -21,7 +21,7 @@ public class SceneDefeatAllEnemies extends Scene {
 
             @Override
             public Result execute() {
-                consoleRPG.setCurrentScene(new SceneEnterIntoDungeon());
+
                 return new Action.Result("Moving you to next scene", true);
             }
         });

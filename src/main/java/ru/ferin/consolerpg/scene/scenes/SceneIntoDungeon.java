@@ -3,7 +3,9 @@ package ru.ferin.consolerpg.scene.scenes;
 import ru.ferin.consolerpg.core.ConsoleRPG;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
+import ru.ferin.consolerpg.world.World;
 import ru.ferin.consolerpg.world.locations.LocationBase;
+import ru.ferin.consolerpg.world.locations.LocationDungeon;
 
 import java.util.EmptyStackException;
 
@@ -11,7 +13,10 @@ public class SceneIntoDungeon extends Scene {
 
     @Override
     public void preInit() {
-        if (location.isCurrentEnemyDead() && location.isEnemiesLeft()) consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
+        if (location.isCurrentEnemyDead() && location.isEnemiesLeft()) {
+            consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", 10, consoleRPG.getPlayer().getLvl())));
+            consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
+        }
         else if (location.isCurrentEnemyDead() && !location.isEnemiesLeft()) consoleRPG.setCurrentScene(new SceneDefeatEnemy());
     }
 
@@ -36,8 +41,6 @@ public class SceneIntoDungeon extends Scene {
                     }
                 });
             }
-        } else {
-            ConsoleRPG.getInstance().setCurrentScene(new SceneDefeatAllEnemies());
         }
     }
 
