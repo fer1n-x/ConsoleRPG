@@ -21,15 +21,15 @@ public class SQLiteManager {
 
             // Создание таблицы, если она не существует
             Statement stmt = conn.createStatement();
-            stmt.execute("CREATE TABLE IF NOT EXISTS levels (lvl INTEGER)");
+            stmt.execute("CREATE TABLE IF NOT EXISTS save (lvl INTEGER)");
             stmt.close();
 
             // Очистка таблицы и вставка новой записи
-            PreparedStatement clearStmt = conn.prepareStatement("DELETE FROM levels");
+            PreparedStatement clearStmt = conn.prepareStatement("DELETE FROM save");
             clearStmt.executeUpdate();
             clearStmt.close();
 
-            PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO levels (lvl) VALUES (?)");
+            PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO save (lvl) VALUES (?)");
             insertStmt.setInt(1, lvl);
             insertStmt.executeUpdate();
             insertStmt.close();
@@ -62,10 +62,10 @@ public class SQLiteManager {
             Statement stmt = conn.createStatement();
 
             // Создание таблицы, если она не существует
-            stmt.execute("CREATE TABLE IF NOT EXISTS levels (lvl INTEGER)");
+            stmt.execute("CREATE TABLE IF NOT EXISTS save (lvl INTEGER)");
 
             // Чтение данных из таблицы
-            ResultSet rs = stmt.executeQuery("SELECT lvl FROM levels LIMIT 1");
+            ResultSet rs = stmt.executeQuery("SELECT lvl FROM save LIMIT 1");
             int lvl = -1;
             if (rs.next()) {
                 lvl = rs.getInt("lvl");

@@ -13,7 +13,6 @@ public class SQLiteManager {
     private static final String DB_URL = "jdbc:sqlite:database.db";
     private static final String SQL_FILE = "save.sql";
 
-    // Метод для сохранения lvl в БД и экспорта в save.sql
     public static void saveLevel(int lvl) {
         try {
             // Подключение к базе данных
@@ -47,7 +46,6 @@ public class SQLiteManager {
         }
     }
 
-    // Метод для чтения lvl из save.sql
     public static int loadLevel() {
         File sqlFile = new File(SQL_FILE);
 
