@@ -1,8 +1,10 @@
 package ru.ferin.consolerpg.scene.scenes;
 
 import ru.ferin.consolerpg.core.ConsoleRPG;
+import ru.ferin.consolerpg.data.SQLiteManager;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
+import ru.ferin.consolerpg.util.WorldUtils;
 import ru.ferin.consolerpg.world.World;
 import ru.ferin.consolerpg.world.locations.LocationBase;
 import ru.ferin.consolerpg.world.locations.LocationDungeon;
@@ -13,9 +15,11 @@ public class SceneIntoDungeon extends Scene {
 
     @Override
     public void preInit() {
-        if (location.isCurrentEnemyDead() && location.isEnemiesLeft()) {
-            consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", 10, consoleRPG.getPlayer().getLvl())));
+        if (location.isEnemiesLeft()) {
+            consoleRPG.getPlayer().setLvl(consoleRPG.getPlayer().getLvl() + 1);
+            consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", WorldUtils.getAvailableEnemyCount(), consoleRPG.getPlayer().getLvl())));
             consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
+            SQLiteManager.saveLevel(consoleRPG.getPlayer().getLvl());
         }
         else if (location.isCurrentEnemyDead() && !location.isEnemiesLeft()) consoleRPG.setCurrentScene(new SceneDefeatEnemy());
     }

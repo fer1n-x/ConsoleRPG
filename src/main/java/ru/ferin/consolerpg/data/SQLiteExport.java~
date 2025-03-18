@@ -14,7 +14,6 @@ public class SQLiteExport {
         String outputFile = "save.sql"; // Имя выходного файла
 
         try {
-            // Подключение к базе данных
             Connection conn = DriverManager.getConnection(dbUrl);
             Statement stmt = conn.createStatement();
 
@@ -27,8 +26,7 @@ public class SQLiteExport {
             writer.write("    lvl INTEGER\n");
             writer.write(");\n\n");
 
-            // Запись данных
-            ResultSet rs = stmt.executeQuery("SELECT * FROM table_name");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM table");
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -49,7 +47,7 @@ public class SQLiteExport {
             stmt.close();
             conn.close();
 
-            System.out.println("Экспорт успешно завершен в файл " + outputFile);
+            //System.out.println("Экспорт успешно завершен в файл " + outputFile);
 
         } catch (Exception e) {
             System.err.println("Ошибка при экспорте: " + e.getMessage());

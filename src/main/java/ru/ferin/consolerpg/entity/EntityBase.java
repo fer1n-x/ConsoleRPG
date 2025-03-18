@@ -28,6 +28,11 @@ public abstract class EntityBase {
         this.attackStrength += attackStrength;
     }
     public abstract int getLvl();
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+
     public abstract void attack(double strength);
     public abstract void death();
     public double handleDamage(double strength) {

@@ -27,7 +27,7 @@ public class SceneEnterIntoDungeon extends Scene {
 
             @Override
             public Result execute() {
-                consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", 10, ConsoleRPG.getInstance().getPlayer().getLvl())));
+                consoleRPG.setWorld(new World(new LocationDungeon("Dungeon", WorldUtils.getAvailableEnemyCount(), ConsoleRPG.getInstance().getPlayer().getLvl())));
                 consoleRPG.setCurrentScene(new SceneIntoDungeon());
                 return new Result("Good luck", true);
             }

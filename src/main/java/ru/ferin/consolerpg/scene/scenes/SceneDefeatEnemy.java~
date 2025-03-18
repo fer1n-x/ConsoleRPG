@@ -6,6 +6,7 @@ import ru.ferin.consolerpg.scene.Scene;
 public class SceneDefeatEnemy extends Scene {
     @Override
     public void preInit() {
+        location.nextEnemy();
     }
 
     @Override
@@ -19,7 +20,6 @@ public class SceneDefeatEnemy extends Scene {
 
             @Override
             public Result execute() {
-                location.nextEnemy();
                 consoleRPG.setCurrentScene(new SceneIntoDungeon());
                 return new Result("Switched to the next enemy", true);
             }
@@ -28,6 +28,6 @@ public class SceneDefeatEnemy extends Scene {
 
     @Override
     public String getDescription() {
-        return "You defeated the enemy. Remain " + (location.getEnemiesCount()-1) + " enemies.";
+        return "You defeated the enemy. Remain " + location.getEnemiesCount() + " enemies.";
     }
 }

@@ -8,6 +8,9 @@ public class WorldUtils {
     }
     public static int getAvailableEnemyCount() {
         int lvl = getAvailableLvl();
-        return lvl + (lvl / 2);
+        return lvl + Math.max(1, lvl / 2);
+    }
+    public static int getCurrentEnemyCount() {
+        return ConsoleRPG.getInstance().getWorld().getCurrentLocation().getEnemiesCount();
     }
 }
