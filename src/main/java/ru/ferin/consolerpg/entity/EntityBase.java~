@@ -1,8 +1,5 @@
 package ru.ferin.consolerpg.entity;
 
-import ru.ferin.consolerpg.data.LogHandler;
-import ru.ferin.consolerpg.data.LogState;
-
 public abstract class EntityBase {
     protected double health;
     protected int lvl;
@@ -35,6 +32,9 @@ public abstract class EntityBase {
 
     public void setLvl(int lvl) {
         this.lvl = lvl;
+    }
+    public void lvlUp() {
+        this.lvl++;
     }
 
     public abstract void attack(double strength);

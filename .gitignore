@@ -43,3 +43,5 @@ bin/
 /.idea/
 database.db
 *.sql
+*.sqlite
+data.sqlite

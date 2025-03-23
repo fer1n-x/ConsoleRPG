@@ -1,5 +1,8 @@
 package ru.ferin.consolerpg.world.locations;
 
+import ru.ferin.consolerpg.core.ConsoleRPG;
+import ru.ferin.consolerpg.data.LogHandler;
+import ru.ferin.consolerpg.data.LogState;
 import ru.ferin.consolerpg.entity.EntityEnemy;
 
 import java.util.EmptyStackException;
@@ -9,9 +12,10 @@ public abstract class LocationBase {
     public String name;
     protected transient final Stack<EntityEnemy> enemies = new Stack<>();
     private transient EntityEnemy currentEnemy = null;
-    public LocationBase(String name, int enemyCount, int lvl) {
+    public LocationBase(String name, int enemyCount) {
         //Выбрасываем исключение, тк кол-во существ не может быть равно или меньше 0
         if (enemyCount < 1) throw new IllegalArgumentException("enemyCount must be greater than 0");
+        int lvl = ConsoleRPG.getInstance().getPlayer().getLvl();
         this.name = name;
         enemyCount += lvl;
         //Создаем существ на основе переданных аргументов
@@ -35,6 +39,7 @@ public abstract class LocationBase {
         }
     }
     public void attackCurrentEnemy(double strength) {
+        LogHandler.writeLog(LogState.LogType.PLAYER_ATTACK, strength);
         currentEnemy.attack(strength);
     }
     public boolean isCurrentEnemyDead() {
@@ -47,5 +52,4 @@ public abstract class LocationBase {
     public int getEnemiesCount() {
         return enemies.size();
     }
-
 }

@@ -1,8 +1,11 @@
 package ru.ferin.consolerpg.core;
 
+import ru.ferin.consolerpg.data.DataManager;
+import ru.ferin.consolerpg.data.SQLiteManager;
+import ru.ferin.consolerpg.data.SaveState;
 import ru.ferin.consolerpg.entity.EntityPlayer;
 import ru.ferin.consolerpg.handler.ConsoleInputHandler;
-import ru.ferin.consolerpg.handler.SaveHandler;
+import ru.ferin.consolerpg.data.SaveHandler;
 import ru.ferin.consolerpg.scene.Action;
 import ru.ferin.consolerpg.scene.Scene;
 import ru.ferin.consolerpg.scene.scenes.SceneMainMenu;
@@ -21,6 +24,7 @@ public class ConsoleRPG {
     private World world;
     private EntityPlayer player;
     private Scene currentScene = null;
+    private SaveState tempSaveState = null;
     public ConsoleRPG(
             //TODO: String playerName
     ) {
@@ -35,6 +39,7 @@ public class ConsoleRPG {
     {
         println("ConsoleRPG v"+Info.VERSION);
         registerCommands();
+        tempSaveState = SQLiteManager.loadLevel();
         runLoop();
     }
 
@@ -76,7 +81,7 @@ public class ConsoleRPG {
      */
     public void turnOff()
     {
-        Main.EXECUTOR.execute(this::save);
+        this.save();
         isRunning = false;
     }
 
@@ -90,8 +95,8 @@ public class ConsoleRPG {
         return consoleRPG;
     }
 
-    private void save() {
-        SaveHandler.saveWorld(world);
+    public void save() {
+        Main.EXECUTOR.execute(DataManager::save);
     }
     public void excuteAction(int number) {
 
@@ -114,5 +119,8 @@ public class ConsoleRPG {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+    public SaveState getTempSaveState() {
+        return this.tempSaveState;
     }
 }

@@ -1,8 +1,8 @@
 package ru.ferin.consolerpg.world.locations;
 
 public class LocationDungeon extends LocationBase {
-    public LocationDungeon(String name, int enemyCount, int lvl) {
-        super(name, enemyCount, lvl);
+    public LocationDungeon(int enemyCount) {
+        super("Dungeon", enemyCount);
     }
     //TODO сделать тут что-нибудь прикольное
 }

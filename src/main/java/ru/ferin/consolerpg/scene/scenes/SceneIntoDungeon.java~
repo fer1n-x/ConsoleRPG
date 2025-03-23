@@ -16,14 +16,6 @@ import java.util.EmptyStackException;
 public class SceneIntoDungeon extends Scene {
 
     @Override
-    public void preInit() {
-        if (location.isEnemiesLeft())
-            consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
-        else if (location.isCurrentEnemyDead() && !location.isEnemiesLeft())
-            consoleRPG.setCurrentScene(new SceneDefeatEnemy());
-    }
-
-    @Override
     public void initActions() {
         if (!location.isEnemiesLeft()) {
             if (!location.isCurrentEnemyDead()) {
@@ -38,7 +30,10 @@ public class SceneIntoDungeon extends Scene {
                     public Result execute() {
                         location.attackCurrentEnemy(ConsoleRPG.getInstance().getPlayer().getAttackStrength());
                         if (location.isCurrentEnemyDead()) {
-
+                            if (location.isEnemiesLeft())
+                                consoleRPG.setCurrentScene(new SceneDefeatAllEnemies());
+                            else
+                                consoleRPG.setCurrentScene(new SceneDefeatEnemy());
                             return new Result("Enemy died.", true);
                         }
                         return new Result("Enemy attacked. He has " + location.getCurrentEnemy().getHealth() + " hp", true);

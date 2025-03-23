@@ -1,13 +1,15 @@
 package ru.ferin.consolerpg.entity;
 
 
+import ru.ferin.consolerpg.data.LogHandler;
+import ru.ferin.consolerpg.data.LogState;
 import ru.ferin.consolerpg.player.Potion;
 import ru.ferin.consolerpg.util.SOut;
 
 public class EntityPlayer extends EntityBase {
 
 
-    public EntityPlayer(double health, int lvl, double attackStrength, double defense) {
+    public EntityPlayer(int lvl, double health, double attackStrength, double defense) {
         super(health, lvl, attackStrength, defense);
     }
 
@@ -27,6 +29,11 @@ public class EntityPlayer extends EntityBase {
     }
 
     @Override
+    public double getDefense() {
+        return this.defense;
+    }
+
+    @Override
     public int getLvl() {
         return lvl;
     }
@@ -35,6 +42,7 @@ public class EntityPlayer extends EntityBase {
     public void attack(double strength) {
         this.health -= (strength - defense);
         defense -= Math.max(0, strength - defense);
+        LogHandler.writeLog(LogState.LogType.PLAYER_DAMAGE, strength);
     }
 
     @Override
@@ -48,5 +56,10 @@ public class EntityPlayer extends EntityBase {
             case HEALTH -> health += potion.strength;
             case DEFENCE -> defense += potion.strength;
         }
+        LogHandler.writeLog(LogState.LogType.APPLIED_POTION, potion.strength);
+    }
+    public void lvlUp() {
+        this.lvl++;
+        LogHandler.writeLog(LogState.LogType.LEVEL_UP, this.lvl);
     }
 }
